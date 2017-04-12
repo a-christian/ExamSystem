@@ -3,25 +3,18 @@
     
     
   include 'Connect.php';
-  
  
-       
-  
-
   $getQuestions = "SELECT * FROM QuestionBank";
-  
-
-  
   
   $result = mysqli_query($connection, $getQuestions);
   
   $numrows = mysqli_num_rows($result);
 
   
-		$i = 0;
+$i = 0;
 	   
       //$exquest = array();
-      $exquest["questcount"] = $numrows;
+$exquest["questcount"] = $numrows;
 
 
           while($row = mysqli_fetch_assoc($result)){
