@@ -9,12 +9,12 @@
 		
            
                       
-            $e_query = mysqli_query($connection, "SELECT examid, examquestion FROM Exam WHERE examid = '$examID' AND examquestion = '$ques'"); 
+            $e_query = mysqli_query($connection, "SELECT examquestion FROM Exam"); 
             $returnCount = mysqli_num_rows($e_query);
             
                if($returnCount > 0) {
                
-                  echo "Question already part of exam id . $examID ";
+                  $update_exam = "UPDATE Exam SET examquestion = '$ques'";
                    
                }
                else {
@@ -28,6 +28,12 @@
 					if(mysqli_query($connection, $add_exam)){
                         $success = "exam submitted successfully";
                         echo json_encode($success); 
+				
+						
+                    }
+					if(mysqli_query($connection, $update_exam)){
+                        $successful = "exam updated successfully";
+                        echo json_encode($successful); 
 				
 						
                     }
