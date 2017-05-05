@@ -4,36 +4,40 @@
     
   include 'Connect.php';
   
-	   
-		$getGrade = "SELECT * FROM StudentGrades";
+	  
+	  
+	  
+	  $getGrade = "SELECT * FROM GradedExams";
    
+	  $result = mysqli_query($connection, $getGrade);
+  
+      $numrows = mysqli_num_rows($result);
 
   
-  
-  $result = mysqli_query($connection, $getGrade);
-  
-  $numrows = mysqli_num_rows($result);
 
-  
+		$feedback = [];
 		$i = 0;
-	   
-      $grades = array();
+		
+          	while($row = mysqli_fetch_assoc($result)){
 
-
-
-          while($row = mysqli_fetch_assoc($result)){
-
-  
-            $grades["$i"] = $row['examgrade'];
-            
-			      $grades["$i"] = $row['explanation'];
-            
-            $i++;
-			      
-
-          }    
-  
-          echo json_encode($grades);
+            array_push($feedback, [
+			array(unserialize($row['question'])),
+			array(unserialize($row['value'])),
+			array(unserialize($row['questionscore'])),
+			array(unserialize($row['compilestatus'])),
+			array(unserialize($row['compilegrade'])),
+			array(unserialize($row['casestatus'])),
+			array(unserialize($row['casegrade'])),
+			array(unserialize($row['parenbracketstatus'])),
+			array(unserialize($row['parenbracketgrade'])),
+			array($row['grade'])
+    
+			]);
+          }
+        //echo json_encode($feedback);
+		
+		print_r($feedback);
+		
 		  
 		 
 		  
