@@ -30,13 +30,13 @@
 			array(unserialize($row['casegrade'])),
 			array(unserialize($row['parenbracketstatus'])),
 			array(unserialize($row['parenbracketgrade'])),
-			array($row['grade'])
-    
+			array($row['grade']),
+			array($row['maxpoints'])
 			]);
           }
-        //echo json_encode($feedback);
+        echo json_encode($feedback);
 		
-		print_r($feedback);
+		//print_r($feedback);
 		
 		  
 		 
