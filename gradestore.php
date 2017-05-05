@@ -15,10 +15,11 @@
 	$parenbracketfeedback = $getfeedback["parenbracketfeedback"];
 	$parenbracketpoints = $getfeedback["parenbracketpoints"];
 	$grade = $getfeedback["grade"];
+	$maxpoints = $getfeedback["maxpoints"];
 	
 	
-	$g_query = "INSERT INTO `ac482`.`GradedExams` (`question`, `value`, `questionscore`, `compilestatus`, `compilegrade`, `casestatus`, `casegrade`, `parenbracketstatus`, `parenbracketgrade`, `grade`) 
-				  VALUES ('$question', '$value', '$questionpoints', '$compilefeedback', '$compilepoints', '$casefeedback', '$casepoints', '$parenbracketfeedback', '$parenbracketpoints', '$grade')";
+	$g_query = "INSERT INTO `ac482`.`GradedExams` (`question`, `value`, `questionscore`, `compilestatus`, `compilegrade`, `casestatus`, `casegrade`, `parenbracketstatus`, `parenbracketgrade`, `grade`, `maxpoints`) 
+				  VALUES ('$question', '$value', '$questionpoints', '$compilefeedback', '$compilepoints', '$casefeedback', '$casepoints', '$parenbracketfeedback', '$parenbracketpoints', '$grade', '$maxpoints')";
 	
 	if(mysqli_query($connection, $g_query)){
 		echo "Graded exam stored successfully";
