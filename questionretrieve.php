@@ -15,15 +15,17 @@
   
   $numrows = mysqli_num_rows($result);
 
-  $exquest = [];
-      
-  $exquest["questcount"] = $numrows;
+  
+		$i = 0;
+	   
+     $exquest = [];
+      $exquest["questcount"] = $numrows;
 
 
-          while($row = mysqli_fetch_assoc($result)) {
+          while($row = mysqli_fetch_assoc($result)){
 			array_push($exquest, [
 			
-                        array($row['question']),
+      array($row['question']),
 			array($row['pointValue']),
 			array($row['category']),
 			array($row['difficulty']),
@@ -37,10 +39,14 @@
 			array($row['answer4'])
 			
             ]);
-	 }     
+			     
+
+          }     
   
 			echo json_encode($exquest);
  
-        mysqli_close($connection);
-?>  
+		  
 
+
+              mysqli_close($connection);
+?>  
