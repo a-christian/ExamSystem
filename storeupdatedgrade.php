@@ -11,8 +11,13 @@ $result = json_decode(file_get_contents("php://input"), true);
 	$caseGrade = serialize($result["caseGrade"]);
 	$parenBracket = serialize($result["parenBracket"]);
 	$bracketGrade = serialize($result["bracketGrade"]);
-	$grade = $result["grade"];
+	$maxpoints = $result["maxpoints"];
 	$feedback = $result["feedback"];
+	
+	//recalculate new grade based on edited points for each question
+	$updatedPoints = unserialize($questionScore);
+	$newTotal = array_sum($updatedPoints);
+	$grade = ($newTotal/$maxpoints) * 100;
 	
 	$u_query = "INSERT INTO `ac482`.`UpdatedGradedExams` (`question`, `answer`, `questionScore`, `compileStatus`, `compileGrade`, `caseStatus`, `caseGrade`, `parenBracket`, `bracketGrade`, `grade`, `feedback`) 
 				  VALUES ('$question', '$answer', '$questionScore', '$compileStatus', '$compileGrade', '$caseStatus', '$caseGrade', '$parenBracket', '$bracketGrade', '$grade', '$feedback')";
