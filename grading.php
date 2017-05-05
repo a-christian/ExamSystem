@@ -149,41 +149,36 @@ function hasParenBrack($string) {
 		//2D array to store the exam questions, student ans, feedback and grade
 			$examfeedback = array
 		(
-			$question,
-			$value,
-			$questionpoints,
-			$compilefeedback,
-			$compilepoints,
-			$casefeedback,
-			$casepoints,
-			$parenbracketfeedback,
-			$parenbracketpoints,
-			$grade
+			"question" => serialize($question),
+			"value" => serialize($value),
+			"questionpoints" => serialize($questionpoints),
+			"compilefeedback" => serialize($compilefeedback),
+			"compilepoints" => serialize($compilepoints),
+			"casefeedback" => serialize($casefeedback),
+			"casepoints" => serialize($casepoints),
+			"parenbracketfeedback" => serialize($parenbracketfeedback),
+			"parenbracketpoints" => serialize($parenbracketpoints),
+			"grade" => $grade
 		);
-		print_r($examfeedback);
+		//print_r($examfeedback);
 		
 		
 		//---------------------------------------------------------------------------------------------------------------------------------//
 		//Sending all this feedback to the backend
 		
-		
+	$examfeedback = json_encode($examfeedback);
 $url = "https://web.njit.edu/~ac482/CS490/gradestore.php";
-$fields = array(
-	'examfeedback' => $examfeedback
-);
 
-//url-ify the data for the POST
-foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-rtrim($fields_string, '&');
 
 //open connection
 $ch = curl_init();
 
 //set the url, number of POST vars, POST data
 curl_setopt($ch,CURLOPT_URL, $url);
+curl_setopt($ch,CURLOPT_POSTFIELDS, $examfeedback);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
-curl_setopt($ch,CURLOPT_POST, count($fields));
-curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
 
 
 //execute post
