@@ -1,4 +1,5 @@
 
+
 <?php
     
   include 'Connect.php';
@@ -32,14 +33,17 @@ $result = mysqli_query($connection, $getExam);
 		 
 			for($i = 0; $i < $count; $i++){
 			
-			$cases = "SELECT case1,case2,case3,case4,answer1,answer2,answer3,answer4 FROM QuestionBank WHERE question = '$ques[$i]' ";
+			$cases = "SELECT * FROM QuestionBank WHERE question = '$ques[$i]' ";
 			
 						$result2 = mysqli_query($connection, $cases);
 			
 			while($row2 = mysqli_fetch_assoc($result2)){
 
             array_push($testcase, [
-            array($row2['case1']),
+			array($row2['question']),
+			array($row2['methodName']),
+			array($row2['pointValue']),
+			array($row2['case1']),
 			array($row2['case2']),
 			array($row2['case3']),
 			array($row2['case4']),
@@ -51,18 +55,12 @@ $result = mysqli_query($connection, $getExam);
 			]);
           }
 			}
-			
-			
-	
-			
-			
-			
-			
-			
-			
+					
 
-		  echo json_encode($ques);
-		  echo json_encode($testcase);
+
+	echo json_encode($testcase);
+	
+
 		
               mysqli_close($connection);
 
