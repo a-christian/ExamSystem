@@ -35,9 +35,9 @@
     
 			]);
           }
-        //echo json_encode($updatedfeedback);
+        echo json_encode($updatedfeedback);
 		
-		print_r($updatedfeedback);
+		//print_r($updatedfeedback);
 		
 		  
 		 
